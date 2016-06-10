@@ -1,10 +1,128 @@
   <ion-content>
     <!-- our list and list items -->
-    <ion-list>
-      <ion-item ng-repeat="task in tasks">
-        {{task.title}}
-      </ion-item>
-    </ion-list>
-    <a href="#/hello">Go to music page!</a>
+
+
+
+
+
+
+<style>
+/*
+@import url('http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,600');
+* {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+p {
+  font-size: 1.1em;
+  margin: 1em 0;
+}
+
+.description {
+  margin: 1em auto 2.25em;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  font-size: 2.5em;
+}
+*/
+ul {
+  list-style: none;
+  padding: 0;
+}
+ul .inner {
+  padding-left: 1em;
+  overflow: hidden;
+  display: none;
+}
+
+ul li a.toggle {
+
+  padding-left: .75em;
+  border-radius: 0.15em;
+  transition: background .3s ease;
+}
+ul li a.toggle:hover {
+  background: offwhite;
+}
+
+.mdl-checkbox{
+	width: auto !important;
+}
+.accordion{
+	width: 100%;
+}
+.toggle{	
+	text-align: left;
+	vertical-align: top;
+}
+
+.mdl-button{
+	height: auto !important;
+	line-height: 25px;
+}
+
+</style>
+
+
+
+<ul class="accordion mdl-card mdl-shadow--2dp" id="tasks">
+  <li class="mdl-card__actions mdl-card--border" ng-repeat="task in tasks">
+    
+    <label class="mdl-cell mdl-cell--1-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+	     <input type="checkbox" id="{{task.title}}" class="mdl-checkbox__input" />
+	  </label>
+	  <span class="mdl-cell mdl-cell--3-col">
+	   <a class="toggle mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="javascript:void(0);">
+    	{{task.title}}
+    	</a>
+
+    	<a class="material-icons">mode_edit</a> 
+    	<a class="material-icons">library_add</a>
+
+      </span>
+      <ul my-recursive-dir="task" style="display: none;"></ul>
+    </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).on("click", ".toggle", function(e) {
+  	e.preventDefault();
+//  	alert($this)
+    var $this = $(this).parent();
+  
+    if ($this.next().hasClass('show')) {
+        $this.next().removeClass('show');
+        $this.next().slideUp(350);
+    } else {
+        $this.parent().parent().find('li .inner').removeClass('show');
+        $this.parent().parent().find('li .inner').slideUp(350);
+        $this.next().toggleClass('show');
+        $this.next().slideToggle(350);
+    }
+});
+
+</script>
+
+
+
 
   </ion-content>

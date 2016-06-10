@@ -5,6 +5,30 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('yettodo', ['yettodo.services','ionic'])
 
+.run(function () {
+    var mdlUpgradeDom = false;
+    setInterval(function() {
+      if (mdlUpgradeDom) {
+        componentHandler.upgradeDom();
+        mdlUpgradeDom = false;
+      }
+    }, 200);
+
+    var observer = new MutationObserver(function () {
+      mdlUpgradeDom = true;
+    });
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+    /* support <= IE 10
+    angular.element(document).bind('DOMNodeInserted', function(e) {
+        mdlUpgradeDom = true;
+    });
+    */
+})
+
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -34,6 +58,7 @@ angular.module('yettodo', ['yettodo.services','ionic'])
   .state('todobooks', {
     //url: '/todobooks',
     abstract: true,
+    controller: 'YettodoCtrl',
     templateUrl: 'templates/todobooks/todobooks.html'
   })
 
@@ -50,6 +75,7 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 
   .state('todobooks.show', {
     url: '/todobooks/:names',
+    controller: 'TasksCtrl',
     templateUrl: 'templates/tasks.html'
   })
 
@@ -61,7 +87,6 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 
   .state('tasks', {
     url: '/tasks',
-    controller: 'YettodoCtrl',
     templateUrl: 'templates/tasks.html'
   })
 
@@ -72,48 +97,61 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 })
 
 
-.controller('YettodoCtrl', function($scope, $state, Todobooks) {
+.controller('YettodoCtrl', function($scope, $state, Todobooks, Tasks) {
 
   $scope.todobooks = Todobooks.all();
 
 
 
-  $scope.tasks = [
-    { title: 'Collect coins' },
-    { title: 'Eat mushrooms' },
-    { title: 'Get high enough to grab the flag' },
-    { title: 'Find the Princess' }
-  ];
+  $scope.tasks = Tasks.all();
 
   $scope.showTasks = function(){
 
     //todo: need to get book list from view rather than controller querying view
     var booknodes = document.querySelectorAll('input[type=checkbox]:checked') ;
-    
     var books =  Array.from(booknodes).map(function(book){ return book.name;})
-   
+
     $state.go("todobooks.show", {names: books })
   }
-
-
-
-
-
 
 
 })
 
 
+.controller('TasksCtrl', function($scope, $state,$stateParams, Tasks) {
 
 
-function Todobooks(){
+//alert($stateParams.names.split(',').l)
+  $scope.tasks = Tasks.getByBook('private');
+//    $stateParams.names.split(','));
 
-}
 
-Todobooks.prototype.getAll = function(){
-  return
-  [
-      {name: "private", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."},
-      {name: "office", description: null}
-  ]
-};
+
+  $scope.showTasks = function(){
+
+    //todo: need to get book list from view rather than controller querying view
+    var booknodes = document.querySelectorAll('input[type=checkbox]:checked') ;
+    var books =  Array.from(booknodes).map(function(book){ return book.name;})
+
+    $state.go("todobooks.show", {names: books })
+  }
+
+
+})
+
+.directive('myRecursiveDir', function(){
+  return {
+     templateUrl: 'templates/tasks/recursiveTasks.html',  
+/*
+     scope: {
+        tasks: '=',
+     },
+   replace: true
+
+    template: 'Name: {{tasks[0].title}}'
+  
+  
+  
+*/
+  };
+});
