@@ -51,7 +51,7 @@
 	    </button>
 
 	    <div class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-js-checkbox">  
-		   <input type="checkbox" name="todobook" class="mdl-checkbox__input" checked>
+		   <input type="checkbox" name="{{todobook.name}}" class="mdl-checkbox__input"  checked>
 	    </div>
 	      	    
 
@@ -63,15 +63,11 @@
   <button class="addbook mdl-cell mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
     <i class="material-icons">playlist_add</i> Add another todobook
   </button>
-	    
-<button onclick="alert(JSON.stringify(document.querySelectorAll('input[name=todobook]:checked')));" class="addbook mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+
+
+<button ng-click="showTasks()" class="addbook mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
   Done
 </button>
-
-<script type="text/javascript">
-alert("hola")
-//  alert(JSON.stringify(document.querySelectorAll('input[name=todobook]:checked')));
-</script>
    
 
 </div>

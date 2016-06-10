@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('yettodo', ['ionic'])
+angular.module('yettodo', ['yettodo.services','ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,25 +21,6 @@ angular.module('yettodo', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
-
-
-.controller('YettodoCtrl', function($scope) {
-  $scope.todobooks=[
-    {name: "private", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."},
-    {name: "office", description: null}
-  ]
-  $scope.tasks = [
-    { title: 'Collect coins' },
-    { title: 'Eat mushrooms' },
-    { title: 'Get high enough to grab the flag' },
-    { title: 'Find the Princess' }
-  ];
-
-
-
-
-
 })
 
 
@@ -68,7 +49,7 @@ angular.module('yettodo', ['ionic'])
   })
 
   .state('todobooks.show', {
-    url: '/todobooks/:name',
+    url: '/todobooks/:names',
     templateUrl: 'templates/tasks.html'
   })
 
@@ -80,6 +61,7 @@ angular.module('yettodo', ['ionic'])
 
   .state('tasks', {
     url: '/tasks',
+    controller: 'YettodoCtrl',
     templateUrl: 'templates/tasks.html'
   })
 
@@ -87,4 +69,51 @@ angular.module('yettodo', ['ionic'])
 
 
 
-});
+})
+
+
+.controller('YettodoCtrl', function($scope, $state, Todobooks) {
+
+  $scope.todobooks = Todobooks.all();
+
+
+
+  $scope.tasks = [
+    { title: 'Collect coins' },
+    { title: 'Eat mushrooms' },
+    { title: 'Get high enough to grab the flag' },
+    { title: 'Find the Princess' }
+  ];
+
+  $scope.showTasks = function(){
+
+    //todo: need to get book list from view rather than controller querying view
+    var booknodes = document.querySelectorAll('input[type=checkbox]:checked') ;
+    
+    var books =  Array.from(booknodes).map(function(book){ return book.name;})
+   
+    $state.go("todobooks.show", {names: books })
+  }
+
+
+
+
+
+
+
+})
+
+
+
+
+function Todobooks(){
+
+}
+
+Todobooks.prototype.getAll = function(){
+  return
+  [
+      {name: "private", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."},
+      {name: "office", description: null}
+  ]
+};
