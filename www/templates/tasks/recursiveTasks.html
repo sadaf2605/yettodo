@@ -1,11 +1,13 @@
-      <li class="mdl-card__actions mdl-card--border" ng-repeat="t in task.tasks">
-        <label class="mdl-cell mdl-cell--1-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-		  <input type="checkbox" id="{{t.title}}" class="mdl-checkbox__input" />
-		</label>
-		<span class="mdl-cell mdl-cell--3-col">
+      <li class="mdl-card--border" ng-repeat="t in task.tasks">
+
+		<div class="task">
+		   <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+			  <input type="checkbox" id="{{t.title}}" class="mdl-checkbox__input" />
+			</label>
+
 	        <a href="#" class="toggle mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{t.title}}</a>
 	        <a class="material-icons">mode_edit</a> 
     		<a class="material-icons">library_add</a>
-    	</span>
+    	</div>
     	<ul class="inner" ng-if="t.tasks" my-recursive-dir="t"></ul>
       </li>
