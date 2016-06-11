@@ -64,22 +64,34 @@ ul li a.toggle:hover {
 	vertical-align: top;
 }
 
-.mdl-button{
+.accordion .mdl-button{
 	height: auto !important;
 	line-height: 25px;
 }
+.scroll{
+	height: 100%;
+}
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label, .mdl-textfield--floating-label.is-dirty .mdl-textfield__label, .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label{
+	color: white !important;
+}
 
+.mdl-textfield__input{
+	background: white;
+}
+.is-focused .mdl-textfield__label{
+
+}
 </style>
 
 
 
-<ul class="accordion mdl-card mdl-shadow--2dp" id="tasks">
-  <li class="mdl-card__actions mdl-card--border" ng-repeat="task in tasks">
+<ul class="accordion mdl-card mdl-shadow--2dp" id="tasks" style="padding-bottom:65px">
+  <li class="mdl-grid mdl-card__actions mdl-card--border" ng-repeat="task in tasks">
     
     <label class="mdl-cell mdl-cell--1-col mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
 	     <input type="checkbox" id="{{task.title}}" class="mdl-checkbox__input" />
-	  </label>
-	  <span class="mdl-cell mdl-cell--3-col">
+	</label>
+	<span class="mdl-cell mdl-cell--3-col">
 	   <a class="toggle mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="javascript:void(0);">
     	{{task.title}}
     	</a>
@@ -87,10 +99,28 @@ ul li a.toggle:hover {
     	<a class="material-icons">mode_edit</a> 
     	<a class="material-icons">library_add</a>
 
-      </span>
-      <ul my-recursive-dir="task" style="display: none;"></ul>
+    </span>
+    <ul my-recursive-dir="task" style="display: none;"></ul>
     </li>
 </ul>
+
+
+
+<div class="mdl-grid" style="position:fixed;bottom:0;width:100%; z-index:991; height:65px;background:#46B6AC;">
+	
+	
+  <div class="mdl-cell mdl-cell--3-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin:0;height: 74px;">
+    <input class="mdl-textfield__input" type="text" id="sample3">
+    <label class="mdl-textfield__label" for="sample3">New task under "hello world</label>
+  </div>
+
+
+  <button class="mdl-cell mdl-cell--1-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-top:19px; background:white;">
+  	ADD
+  </button>
+
+
+</div>
 
 
 
