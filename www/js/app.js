@@ -97,10 +97,26 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 })
 
 
-.controller('YettodoCtrl', function($scope, $state, Todobooks, Tasks) {
+.controller('YettodoCtrl', function($scope, $state,$http, Todobooks, Tasks) {
 
-  $scope.todobooks = Todobooks.all();
 
+   
+
+Todobooks.all().then(
+           function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          //alert(JSON.stringify(response.data))
+          $scope.todobooks=response.data
+
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          alert({"error":JSON.stringify(response)})
+        })
+
+
+//alert(JSON.stringify(Todobooks.all()))
 
 
   $scope.tasks = Tasks.all();

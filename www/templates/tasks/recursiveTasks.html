@@ -1,4 +1,4 @@
-      <li class="mdl-card--border" ng-repeat="t in task.tasks">
+      <li class="mdl-card--border" ng-repeat="t in task.subtasks">
 
 		<div class="task">
 		   <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -9,5 +9,5 @@
 	        <a class="material-icons">mode_edit</a> 
     		<a class="material-icons">library_add</a>
     	</div>
-    	<ul class="inner" ng-if="t.tasks" my-recursive-dir="t"></ul>
+    	<ul class="inner" ng-if="t.subtasks" my-recursive-dir="t"></ul>
       </li>
