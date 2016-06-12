@@ -1,4 +1,4 @@
-angular.module('yettodo.services', [])
+angular.module('yettodo')
 
 .factory('Todobooks', function($http) {
   // Might use a resource here that returns a JSON array

@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('yettodo', ['yettodo.services','ionic'])
+angular.module('yettodo', ['ionic'])
 
 .run(function () {
     var mdlUpgradeDom = false;
@@ -48,168 +48,12 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 })
 
 
-.config(function($stateProvider) {
-  $stateProvider
-  .state('hello', {
-    url: '/hello',
-    templateUrl: 'templates/hello.html'
-  })
-
-  .state('todobooks', {
-    //url: '/todobooks',
-    abstract: true,
-    controller: 'YettodoCtrl',
-    templateUrl: 'templates/todobooks/todobooks.html'
-  })
-
-  .state('todobooks.list', {
-    url: '/todobooks',
-    //abstract: true,
-    templateUrl: 'templates/todobooks/list.html'
-  })
-
-  .state('todobooks.new', {
-    url: '/todobooks/new',
-    templateUrl: 'templates/todobooks/new.html'
-  })
-
-  .state('todobooks.show', {
-    url: '/todobooks/:names',
-    controller: 'TasksCtrl',
-    templateUrl: 'templates/tasks.html'
-  })
-
-  .state('tasks.all', {
-    url: '/todobooks/:name/tasks',
-    //templateUrl: 'templates/tasks.html'
-  })
-
-
-  .state('tasks', {
-    url: '/tasks',
-    templateUrl: 'templates/tasks.html'
-  })
 
 
 
 
 
-})
 
-
-.controller('YettodoCtrl', function($scope, $state,$http, Todobooks, Tasks) {
-        $scope.booksSelectStates={}
-
-    $scope.updateTodobooks = function(){
-   
-
-        Todobooks.all().then(
-           function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          //alert(JSON.stringify(response.data))
-          $scope.todobooks=response.data
-
-
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          //alert({"error":JSON.stringify(response)})
-        })
-    }
-    
-    $scope.updateTodobooks()
-
-//alert(JSON.stringify(Todobooks.all()))
-
-
- 
-
-  $scope.createTodobook = function(name, description){
-
-    Todobooks.create(name, description).then(
-           function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          //alert(JSON.stringify(response.data))
-          $state.go("todobooks.show", {names: name })
-
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          //alert(JSON.stringify({"fail":response}))
-        })
-
-  }
-
-
-  $scope.showTasks = function(){
-
-    //todo: need to get book list from view rather than controller querying view
-    
-      $scope.selectedBooks = function(){
-
-         return $.map($scope.todobooks, function (book) {
-
-         if ($scope.booksSelectStates[book.name ])
-          return book.name
-        })
-      }
-
-    var books=$scope.selectedBooks()
-
-    Tasks.byBook( books ).then(
-           function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          //alert(JSON.stringify(response.data))
-          $scope.tasks=response.data.tasks
-        
-
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          //alert({"error":JSON.stringify(response)})
-        })
-
-    $state.go("todobooks.show", {names: books })
-  }
-
-
-})
-
-
-.controller('TasksCtrl', function($scope, $state,$stateParams, Tasks) {
-
-
-//alert($stateParams.names.split(',').l)
- // $scope.tasks = Tasks.getByBook('private');
-//    $stateParams.names.split(','));
-
-  
-  $scope.createTask = function(todobook, title){
-
-    Tasks.create(todobook, title).then(
-           function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          //alert(JSON.stringify(response.data))
-          //$state.go("todobooks.show", {names: name })
-          alert(JSON.stringify(response))
-
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          alert(JSON.stringify({"fail":response}))
-        })
-
-  }
-
-//  $scope.createTask("office","great title")
-
-
-
-})
 
 .directive('myRecursiveDir', function(){
   return {
