@@ -109,17 +109,18 @@ angular.module('yettodo', ['yettodo.services','ionic'])
           //alert(JSON.stringify(response.data))
           $scope.todobooks=response.data
 
+
         }, function errorCallback(response) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          alert({"error":JSON.stringify(response)})
+          //alert({"error":JSON.stringify(response)})
         })
 
 
 //alert(JSON.stringify(Todobooks.all()))
 
 
-  $scope.tasks = Tasks.all();
+ 
 
   $scope.createTodobook = function(name, description){
 
@@ -133,7 +134,7 @@ angular.module('yettodo', ['yettodo.services','ionic'])
         }, function errorCallback(response) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          alert(JSON.stringify({"fail":response}))
+          //alert(JSON.stringify({"fail":response}))
         })
 
   }
@@ -144,6 +145,20 @@ angular.module('yettodo', ['yettodo.services','ionic'])
     //todo: need to get book list from view rather than controller querying view
     var booknodes = document.querySelectorAll('input[type=checkbox]:checked') ;
     var books =  Array.from(booknodes).map(function(book){ return book.name;})
+
+    Tasks.byBook("office").then(
+           function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          //alert(JSON.stringify(response.data))
+          $scope.tasks=response.data.tasks
+        
+
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          //alert({"error":JSON.stringify(response)})
+        })
 
     $state.go("todobooks.show", {names: books })
   }
@@ -156,19 +171,30 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 
 
 //alert($stateParams.names.split(',').l)
-  $scope.tasks = Tasks.getByBook('private');
+ // $scope.tasks = Tasks.getByBook('private');
 //    $stateParams.names.split(','));
 
+  
+  $scope.createTask = function(todobook, title){
 
+    Tasks.create(todobook, title).then(
+           function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          //alert(JSON.stringify(response.data))
+          //$state.go("todobooks.show", {names: name })
+          alert(JSON.stringify(response))
 
-  $scope.showTasks = function(){
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          alert(JSON.stringify({"fail":response}))
+        })
 
-    //todo: need to get book list from view rather than controller querying view
-    var booknodes = document.querySelectorAll('input[type=checkbox]:checked') ;
-    var books =  Array.from(booknodes).map(function(book){ return book.name;})
-
-    $state.go("todobooks.show", {names: books })
   }
+
+  $scope.createTask("office","great title")
+
 
 
 })

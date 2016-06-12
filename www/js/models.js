@@ -44,22 +44,11 @@ angular.module('yettodo.services', [])
 
 
 
-    },
-    remove: function(todobook) {
-      chats.splice(todobooks.indexOf(todobook), 1);
-    },
-    get: function(name) {
-      for (var i = 0; i < todobooks.length; i++) {
-        if (todobooks[i].id === name) {
-          return todobooks[i];
-        }
-      }
-      return null;
     }
   };
 })
 
-.factory('Tasks', function() {
+.factory('Tasks', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -71,34 +60,31 @@ angular.module('yettodo.services', [])
   ];
 
   return {
-    all: function() {
-      return tasks;
-    },
-    remove: function(task) {
-      tasks.splice(tasks.indexOf(task), 1);
-    },
-    get: function(id) {
-      for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].id === parseInt(id)) {
-          return tasks[i];
+    byBook: function(name) {
+      return $http({
+        method: 'GET',
+        url: 'http://yettodo.herokuapp.com/todobooks/'+name,
+        headers: {
+         'Content-Type': 'application/json'
         }
-      }
-      return null;
+      })
+
     },
-    getByBook: function(name){
-    	alert(name)
-
-      var t=[];
-
-      for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].bookname === name) {
-          	t.push( tasks[i] );
+      create: function(todobook, title) {
+      return $http({
+        method: 'POST',
+        url: 'http://yettodo.herokuapp.com/todobooks/'+todobook+'/tasks',
+        headers: {
+         'Content-Type': 'application/json'
+        },
+        data: {
+          title: title
         }
-      }
-      return t;
+      })
 
-    }
+    },
+
   };
-});
+})
 
 
