@@ -25,6 +25,13 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.mdl-checkbox.is-upgraded{
+	padding-left: 0px !important;
+}
+.mdl-card__menu {
+    right: 0px;
+ }
 </style>
 
 
@@ -47,13 +54,18 @@
 	  </div-->
 	  <div class="mdl-card__menu">
 
-	    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">  
-		   <i class="material-icons">mode_edit</i>
-	    </button>
 
-	    <div class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-js-checkbox">  
-		   <input type="checkbox" name="{{todobook.name}}" class="mdl-checkbox__input"  checked>
+
+		<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="android" style="left: 5px;">
+
+		  <input type="checkbox" name="{{todobook.name}}" id="android" class="mdl-checkbox__input" />
+
+		</label>
+
+	    <div class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">  
+		   <i class="material-icons">mode_edit</i>
 	    </div>
+
 	      	    
 
 
