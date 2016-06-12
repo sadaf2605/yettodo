@@ -15,8 +15,7 @@ angular.module('yettodo.services', [])
         url: 'http://yettodo.herokuapp.com/todobooks',
         headers: {
          'Content-Type': 'application/json'
-        },
-        timeout: 1000
+        }
       })
 
 
@@ -27,6 +26,24 @@ angular.module('yettodo.services', [])
 
   //    alert("todobooks")
    //   return todobooks;
+    },
+    create: function(name, description) {
+      alert(name)
+      return $http({
+        method: 'POST',
+        url: 'http://yettodo.herokuapp.com/todobooks',
+        headers: {
+         'Content-Type': 'application/json'
+        },
+        data: {
+          name: name,
+          description: description
+
+        }
+      })
+
+
+
     },
     remove: function(todobook) {
       chats.splice(todobooks.indexOf(todobook), 1);

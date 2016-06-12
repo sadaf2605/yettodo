@@ -26,10 +26,10 @@
 	margin-right: auto;
 }
 
-.mdl-checkbox.is-upgraded{
-	padding-left: 0px !important;
+.book > .mdl-checkbox.is-upgraded{
+	/*padding-left: 0px !important;*/
 }
-.mdl-card__menu {
+.book >.mdl-card__menu {
     right: 0px;
  }
 </style>
@@ -40,7 +40,7 @@
   <div class="mdl-cell mdl-cell--4-col" ng-repeat="todobook in todobooks">
 
 
-	<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+	<div class="demo-card-wide book mdl-card mdl-shadow--2dp">
 	  <div class="mdl-card__title">
 	    <h2 class="mdl-card__title-text">{{todobook.name}}</h2>
 	  </div>
@@ -73,9 +73,9 @@
 	</div>
   </div>
 
-  <button class="addbook mdl-cell mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+  <a href="#/todobooks/new" class="addbook mdl-cell mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
     <i class="material-icons">playlist_add</i> Add another todobook
-  </button>
+  </a>
 
 
 <button ng-click="showTasks()" class="addbook mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">

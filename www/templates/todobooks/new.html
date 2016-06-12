@@ -1,3 +1,25 @@
 <ion-content>
-Create your new todobook!
+<h1> Create your new todobook!</h1>
+	<div>
+	  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
+	    <input class="mdl-textfield__input" type="text" id="todobookname" ng-model="newname" />
+	    <label class="mdl-textfield__label" for="todobookname">Todobook name</label>
+	  </div>
+
+		<div class="mdl-textfield mdl-js-textfield">
+	               <textarea class="mdl-textfield__input" type="text" rows= "3" id="todobookdescription" ng-model="newdescription"></textarea>
+	               <label class="mdl-textfield__label" for="todobookdescription">Description of your todobook.</label>
+	            </div>
+	</div>
+     <!-- Raised button -->
+
+
+	<!-- Colored raised button -->
+	<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="createTodobook(newname,newdescription)">
+	  	Create
+	</button>
+	<button class="mdl-button mdl-js-button mdl-button--raised">
+	 	Back
+	</button>
+
 </ion-content>

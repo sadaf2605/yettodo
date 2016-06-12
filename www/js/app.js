@@ -102,7 +102,7 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 
    
 
-Todobooks.all().then(
+        Todobooks.all().then(
            function successCallback(response) {
           // this callback will be called asynchronously
           // when the response is available
@@ -120,6 +120,24 @@ Todobooks.all().then(
 
 
   $scope.tasks = Tasks.all();
+
+  $scope.createTodobook = function(name, description){
+
+    Todobooks.create(name, description).then(
+           function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          //alert(JSON.stringify(response.data))
+          $state.go("todobooks.show", {names: name })
+
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          alert(JSON.stringify({"fail":response}))
+        })
+
+  }
+
 
   $scope.showTasks = function(){
 
