@@ -98,8 +98,9 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 
 
 .controller('YettodoCtrl', function($scope, $state,$http, Todobooks, Tasks) {
+        $scope.booksSelectStates={}
 
-
+    $scope.updateTodobooks = function(){
    
 
         Todobooks.all().then(
@@ -115,7 +116,9 @@ angular.module('yettodo', ['yettodo.services','ionic'])
           // or server returns response with an error status.
           //alert({"error":JSON.stringify(response)})
         })
-
+    }
+    
+    $scope.updateTodobooks()
 
 //alert(JSON.stringify(Todobooks.all()))
 
@@ -143,10 +146,19 @@ angular.module('yettodo', ['yettodo.services','ionic'])
   $scope.showTasks = function(){
 
     //todo: need to get book list from view rather than controller querying view
-    var booknodes = document.querySelectorAll('input[type=checkbox]:checked') ;
-    var books =  Array.from(booknodes).map(function(book){ return book.name;})
+    
+      $scope.selectedBooks = function(){
 
-    Tasks.byBook("office").then(
+         return $.map($scope.todobooks, function (book) {
+
+         if ($scope.booksSelectStates[book.name ])
+          return book.name
+        })
+      }
+
+    var books=$scope.selectedBooks()
+
+    Tasks.byBook( books ).then(
            function successCallback(response) {
           // this callback will be called asynchronously
           // when the response is available
@@ -193,7 +205,7 @@ angular.module('yettodo', ['yettodo.services','ionic'])
 
   }
 
-  $scope.createTask("office","great title")
+//  $scope.createTask("office","great title")
 
 
 

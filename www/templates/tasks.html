@@ -122,21 +122,30 @@ ul li a.toggle:hover {
 	
 	
   <div class="mdl-cell mdl-cell--3-col-phone mdl-cell--7-col-tablet mdl-cell--11-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin:0;height: 85px;">
-    <input class="mdl-textfield__input" type="text" id="sample3" style="width:100%">
+    <input class="mdl-textfield__input" type="text" id="sample3" style="width:100%" ng-model="newtask.title">
     <label class="mdl-textfield__label" for="sample3">New task under "hello world"</label>
     	<a style="float:right;color:white" id="more">More options</a>
+
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{book}}" ng-repeat="book in selectedBooks()">
+        <input type="radio" id="windows" class="mdl-radio__button" name="options" ng-model="newtask.book" ng-value="book" ng-checked="$index == 0" />
+        <span class="mdl-radio__label" >{{book}}</span>
+      </label>
+
+
   </div>
   	
 
 
 
+
   <div class="mdl-cell mdl-cell--1-col">
-   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-top:19px; background:white;">
+
+   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-top:19px; background:white;"ng-click="createTask(newtask.book,newtask.title)">
   	ADD
   	</button>
 
   </div>
-	
+
 
   	
   	<div class="moreop inner">
