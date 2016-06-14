@@ -1,11 +1,4 @@
   <ion-content>
-    <!-- our list and list items -->
-    <ion-list>
-      <ion-item ng-repeat="todobook in todobooks">
-        {{todobook.name}}
-      </ion-item>
-    </ion-list>
-	<a href=".#/todobooks/new">Create a new todobook!</a>
   
 
   <style>
@@ -42,7 +35,7 @@
 
 	<div class="demo-card-wide book mdl-card mdl-shadow--2dp">
 	  <div class="mdl-card__title">
-	    <h2 class="mdl-card__title-text">{{todobook.name}}</h2>
+	    <h2 class="mdl-card__title-text"><a href="#/todobooks/{{todobook.name}}">{{todobook.name}}</h2>
 	  </div>
 	  <div class="mdl-card__supporting-text" ng-if="todobook.description">
 	    {{todobook.description}}
@@ -52,7 +45,8 @@
 	      Get Started
 	    </a>
 	  </div-->
-	  <div class="mdl-card__menu">
+
+	  <!--div class="mdl-card__menu">
 
 
 
@@ -71,7 +65,9 @@
 	      	    
 
 
-	  </div>
+	  </div-->
+
+
 	</div>
   </div>
 

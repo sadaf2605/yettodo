@@ -1,6 +1,6 @@
 angular.module('yettodo')
 
-.factory('Todobooks', function($http) {
+.factory('Todobooks', function($http, $window) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -15,6 +15,9 @@ angular.module('yettodo')
         url: 'http://yettodo.herokuapp.com/todobooks',
         headers: {
          'Content-Type': 'application/json'
+        },
+        data:{
+          token: $window.authtoken
         }
       })
 
@@ -28,7 +31,6 @@ angular.module('yettodo')
    //   return todobooks;
     },
     create: function(name, description) {
-      alert(name)
       return $http({
         method: 'POST',
         url: 'http://yettodo.herokuapp.com/todobooks',
@@ -37,7 +39,8 @@ angular.module('yettodo')
         },
         data: {
           name: name,
-          description: description
+          description: description,
+          token: $window.authtoken,
 
         }
       })
@@ -48,7 +51,7 @@ angular.module('yettodo')
   };
 })
 
-.factory('Tasks', function($http) {
+.factory('Tasks', function($http,$window) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -66,11 +69,14 @@ angular.module('yettodo')
         url: 'http://yettodo.herokuapp.com/todobooks/'+name,
         headers: {
          'Content-Type': 'application/json'
+        },
+        data:{
+          token: $window.authtoken
         }
       })
 
     },
-      create: function(todobook, title) {
+      create: function(todobook, title,dir) {
       return $http({
         method: 'POST',
         url: 'http://yettodo.herokuapp.com/todobooks/'+todobook+'/tasks',
@@ -78,7 +84,9 @@ angular.module('yettodo')
          'Content-Type': 'application/json'
         },
         data: {
-          title: title
+          title: title,
+          dir: dir,
+          token: $window.authtoken
         }
       })
 
@@ -87,4 +95,41 @@ angular.module('yettodo')
   };
 })
 
+
+.factory('User', function($http, $window) {
+
+  return {
+    signin: function(username, password) {
+      return $http({
+        method: 'POST',
+        url: 'http://yettodo.herokuapp.com/signin',
+        data:{
+          username: username,
+          password: password,
+          token: $window.authtoken
+        },
+        headers: {
+         'Content-Type': 'application/json'
+        }
+      })
+
+    },
+    signup: function(username, password) {
+      return $http({
+        method: 'POST',
+        url: 'http://yettodo.herokuapp.com/users',
+        data:{
+          username: username,
+          password: password,
+          token: $window.authtoken
+        },
+        headers: {
+         'Content-Type': 'application/json'
+        }
+      })
+
+    }
+
+  };
+})
 

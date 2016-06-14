@@ -1,4 +1,4 @@
-  <ion-content>
+  <ion-content scroll="false">
     <!-- our list and list items -->
 
 
@@ -7,32 +7,7 @@
 
 
 <style>
-/*
-@import url('http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,600');
-* {
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
-p {
-  font-size: 1.1em;
-  margin: 1em 0;
-}
 
-.description {
-  margin: 1em auto 2.25em;
-}
-
-h1 {
-  font-family: 'Pacifico', cursive;
-  font-weight: 400;
-  font-size: 2.5em;
-}
-*/
 ul {
   list-style: none;
   padding: 0;
@@ -90,67 +65,153 @@ ul li a.toggle:hover {
 .accordion label{
 	display: inline;
 }
+.accordion .mdl-card{
+  min-height: 0px;
+}
 
+footer{
+  padding-top:0 !important;
+    padding-bottom:0 !important;
+}
+.mdl-mini-footer{
+  color: white;
+}
+.action {
+  color: #46B6AC !important;
+}
+
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {bottom:-300px; opacity:0} 
+
+}
+
+@keyframes animatetop {
+    from {bottom:-300px; opacity:0}
+}
+
+
+
+.newtask > div{
+  margin:0;
+  height: 85px;
+}
+.newtask > input{
+  width:100%
+}
+.addtask{
+  margin-top:19px; 
+  background:white;
+}
+.close{
+  background:white; 
+  width:100%;
+}
 </style>
 
+<div class="site mdl-layout mdl-js-layout" style="overflow:visible">
+      <main class="mdl-layout__content">
 
+        <ul class="accordion mdl-card mdl-shadow--2dp" id="tasks" style="padding-left: 10px;">
+            <li class="mdl-card--border" ng-repeat="task in tasks">
+              
 
-<ul class="accordion mdl-card mdl-shadow--2dp" id="tasks" style="margin-bottom:85px; padding-left: 10px;">
-  <li class="mdl-card--border" ng-repeat="task in tasks">
-    
+            <div class="task">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" style="width:10px">
+                 <input type="checkbox" id="{{task.title}}" class="mdl-checkbox__input" />
+              </label>
 
-	<div class="task">
-	  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" style="width:10px">
-	     <input type="checkbox" id="{{task.title}}" class="mdl-checkbox__input" />
-	  </label>
+               <a class="toggle mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="javascript:void(0);">{{task.title}}</a>
 
-	   <a class="toggle mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="javascript:void(0);">
-    	{{task.title}}
-    	</a>
+                <!--a class="material-icons action">mode_edit</a--> 
+                <a class="material-icons addsubtask action">library_add</a>
 
-    	<a class="material-icons">mode_edit</a> 
-    	<a class="material-icons">library_add</a>
+              </div>
+              <ul my-recursive-dir="task" style="display: none;"></ul>
+              </li>
+          </ul>
 
-    </div>
-    <ul my-recursive-dir="task" style="display: none;"></ul>
-    </li>
-</ul>
-
-
-
-<div class="mdl-grid newtask" style="position:fixed;bottom:0;width:100%; z-index:991; height:85px;background:#46B6AC;">
-	
-	
-  <div class="mdl-cell mdl-cell--3-col-phone mdl-cell--7-col-tablet mdl-cell--11-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin:0;height: 85px;">
-    <input class="mdl-textfield__input" type="text" id="sample3" style="width:100%" ng-model="newtask.title">
-    <label class="mdl-textfield__label" for="sample3">New task under "hello world"</label>
-    	<a style="float:right;color:white" id="more">More options</a>
-
-      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{book}}" ng-repeat="book in selectedBooks()">
-        <input type="radio" id="windows" class="mdl-radio__button" name="options" ng-model="newtask.book" ng-value="book" ng-checked="$index == 0" />
-        <span class="mdl-radio__label" >{{book}}</span>
-      </label>
-
-
-  </div>
-  	
+         
+      </main>
 
 
 
 
-  <div class="mdl-cell mdl-cell--1-col">
-
-   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-top:19px; background:white;"ng-click="createTask(newtask.book,newtask.title)">
-  	ADD
-  	</button>
-
-  </div>
 
 
-  	
-  	<div class="moreop inner">
-  		
-  	</div>
+
+
+
+
+
+      <!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+
+      <div class="mdl-grid newtask" style="background:#46B6AC;">
+
+            <h7>Add a task under <span id="taskunder"> </span> </h7>
+
+            <div class="newtask mdl-cell mdl-cell--3-col-phone mdl-cell--7-col-tablet mdl-cell--11-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="sample3" ng-model="newtask.title">
+            <label id="newtaskhelp" class="mdl-textfield__label" for="sample3">New task</label>
+              <!--a style="float:right;color:white" id="more">More options</a-->
+
+
+              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{book}}" ng-repeat="book in selectedBooks">
+                <input type="radio" id="windows" class="mdl-radio__button" name="options" default/>
+                <!--ng-model="newtask.book" ng-value="book" -->
+                <span class="mdl-radio__label" >{{book}}</span>
+              </label>
+
+
+          </div>
+            
+
+
+
+
+          <div class="mdl-cell mdl-cell--1-col">
+            
+           <input id="taskdir" type="hidden" >
+
+           <button class="addtask mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" ng-click="createTask(newtask.book,newtask.title)" onclick="clearnewtaskhelp()">
+            ADD
+            </button>
+
+          
+           
+
+          </div>
+          <div class="close mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">CLOSE</div>
+      </div>
+
 
 </div>
 
@@ -165,33 +226,82 @@ ul li a.toggle:hover {
 
 
 
+      <footer class="mdl-mini-footer newtask" style="background:#46B6AC;">
+          <!-- Footer Content -->
+
+
+            <div class="mdl-cell mdl-cell--3-col-phone mdl-cell--7-col-tablet mdl-cell--11-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="newtasktitle" ng-model="newtask.title">
+            <label id="newtaskhelp" class="mdl-textfield__label" for="sample3">New task</label>
+              <!--a style="float:right;color:white" id="more">More options</a-->
+
+
+              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{book}}" ng-repeat="book in selectedBooks">
+                <input type="radio" id="windows" class="mdl-radio__button" name="options" ng-model="newtask.book" ng-value="book" default />
+                <span class="mdl-radio__label" >{{book}}</span>
+              </label>
+
+
+          </div>
+            
+
+
+
+
+          <div class="mdl-cell mdl-cell--1-col">
+            
+           <input id="taskdir" type="hidden" >
+
+           <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-top:19px; background:white;"ng-click="createTask(newtask.book,newtask.title)" onclick="clearnewtaskhelp()">
+            ADD
+            </button>
+
+          </div>
+
+
+            
+            <div class="moreop inner">
+              
+            </div>
+      </footer>
+
+    </div>
+
+
+
+
+
+
 <script type="text/javascript">
-$(document).on("click", "#more", function(e) {
+// Get the modal
+var modal = document.getElementById('myModal');
 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
-  	if ($(this).hasClass('show')) {
-  		  $( ".newtask" ).animate({
-		    height: $( ".newtask" ).height()-70
-		  } );
-		  alert("hehe")
-		  $(this).toggleClass('show');
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+    $("footer").hide()
+}
 
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+    $("footer").show()
+    window.dir=null
+}
 
-  	}else{
-  		alert("hehe2")
-  		  $( ".newtask" ).animate({
-		    height: $( ".newtask" ).height()+100
-		  } );
-		  $(this).toggleClass('show');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
-  	}
-
-  		
-
-
-
-});
 
 
 
@@ -209,7 +319,61 @@ $(document).on("click", ".toggle", function(e) {
         $this.next().toggleClass('show');
         $this.next().slideToggle(350);
     }
+
 });
+
+
+
+
+$(document).on("click", ".addsubtask", function(e) {
+    e.preventDefault();
+
+
+    function taskdir(root){
+
+      var trace=[root.prev().prev(".toggle").text()]
+      function parenttrace(obj){
+
+        recobj =  obj.parents().parents().parents().parents().children('.task').children('.toggle').first() //.parents();
+
+        if( recobj.text() != null && recobj.text().length>0 ){
+          trace.push(recobj.text());
+
+          //alert(recobj.text() )
+          parenttrace(recobj)
+        }
+        
+      }
+
+    parenttrace(root);
+
+    return trace;
+  }
+
+  window.dir=taskdir($(this));
+  
+  $("#newtaskhelp").text(
+    "Create new task < " + window.dir.join(" < ")
+    )
+
+  $("taskunder").text( window.dir.join(" < "))
+  
+      modal.style.display = "block";
+    $("footer").hide()
+
+});
+
+function clearnewtaskhelp(){
+
+  $("#newtaskhelp").text(
+    "Create new task"
+    )
+
+  $("#newtasktitle").val("")
+  
+
+}
+
 
 </script>
 

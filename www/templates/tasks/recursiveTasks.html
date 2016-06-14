@@ -6,8 +6,8 @@
 			</label>
 
 	        <a href="#" class="toggle mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{t.title}}</a>
-	        <a class="material-icons">mode_edit</a> 
-    		<a class="material-icons">library_add</a>
+                <!--a class="material-icons action">mode_edit</a--> 
+                <a class="material-icons addsubtask action">library_add</a>
     	</div>
-    	<ul class="inner" ng-if="t.subtasks.length > 0" my-recursive-dir="t"></ul>
+    	<ul class="inner" ng-if="t.subtasks.length > 0" ng-init="task=t" my-recursive-dir="t"></ul>
       </li>

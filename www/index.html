@@ -24,39 +24,76 @@
 
 
 <style>
-.nav li{
+.menunav{
+  padding: 0px;
+  height:100%;
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+}
+.menunav li{
   padding-bottom: 10px; 
-}
-
-.nav li i{
-  font-size: 10vw;
-}
-
-.nav li{
   font-size: 8vw;
 }
+
+.menunav li i{
+  font-size: 10vw;
+
+}
+
+
+.menunav li a{
+  color: white;
+}
+.logotitle{
+  writing-mode: vertical-rl;
+
+}
+.menunav > ul{
+  background:black;
+  color:white;
+  width:10%;
+  margin: 0px;
+}
+
+@media screen and (min-width: 750px) {
+  .menunav li i{
+    font-size: 4vw;
+  }
+  .menunav > ul{
+    width:4%;
+  }
+}
+
 </style>
     <body ng-app="yettodo" ng-controller="YettodoCtrl">
-      <div class="nav mdl-grid" style="padding: 0px;height:100%;position:absolute;top:0;left:0;right:0;bottom:0;">
+      <div class="menunav mdl-grid">
 
-        <ul class="demo-list-two mdl-list" style="width:40px;background:black;color:white;width:10%;margin: 0px;">
-          <li style="writing-mode: sideways-lr;">YETTODO</li>
+        <ul class="mdl-list">
+          <li class="logotitle"><a><i class="material-icons">YETTODO</i><a></li>
           <li title="your todobooks">
-            <i class="material-icons">book</i>
+            <a href="#/todobooks"> <i class="material-icons">book</i> </a>
           </li>
           <li title="your tasks">
-            <i class="material-icons">assignment</i>
+            <a href="#/tasks">
+              <i class="material-icons">assignment</i>
+            </a>
           </li>
 
           <li title="completed tasks">
-            <i class="material-icons">done</i>
+            <a href="#/tasks">
+              <i class="material-icons">done</i>
+            </a>
           </li>
           <li title="your late tasks">
-            <i class="material-icons">assignment_turned_in</i>
+              <a href="#/tasks">
+                <i class="material-icons">assignment_turned_in</i>
+              </a>
           </li>
 
           <li title="your profile">
-            <i class="material-icons">account_box</i>
+            <a href="#/tasks">
+              <i class="material-icons">account_box</i>
+            </a>
           </li>
           <li title="your settings">
             <i class="material-icons">settings_applications</i>
